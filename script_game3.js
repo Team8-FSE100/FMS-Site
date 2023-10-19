@@ -1,41 +1,38 @@
-let bubbles = [];
+var circles = [];
 
 function setup() {
-    createCanvas(400, 400);
-    background(220);
-
-    stroke(0);
-    strokeWeight(4);
-
-    noFill();
-    rect(0, 0, width, height);
-
-    let numBubbles = floor(random(3, 11));
-    for (let i = 0; i < numBubbles; i++) {
-        let x = random(width);
-        let y = random(height);
-        let radius = random(20, 50);
-
-        bubbles.push(new Bubble(x, y, radius));
+  createCanvas(640, 360);
+  
+  
+  for (var i = 0; i < 20; i++){
+    var circle = {
+  
+   x: random(width),
+   y: random(height),
+   r: random(10, 50)
+  };
+    var overlapping = false;
+    
+    for(var j = 0; j < circles.length; j++){
+      var other = circles[j];
+      var d = dist(circle.x, circle.y, other.x, other.y)
+      if(d < circle.r + other.r){
+        overlapping = true;
+        break;
       }
-  }
 
-  function draw() {
-    background(220);
-
-    for (let i = 0; i < bubbles.length; i++) {
-      bubbles[i].display();
     }
-  }
-
-  class Bubble {
-    constructor(x, y, radius) {
-      this.x = x;
-      this.y = y;
-      this.radius = radius;
+    if(!overlapping){
+       circles.push(circle);
     }
-
-    display() {
-      ellipse(this.x, this.y, this.radius * 2, this.radius * 2); // Draw the bubble
-    }
-  }
+    
+   for ( i = 0; i < circles.length; i++){
+     fill(100, 100);
+     noStroke();
+     ellipse(circles[i].x,circles[i].y,circles[i].r*2, circles[i].r*2)
+   }
+}
+  
+  
+  
+}
