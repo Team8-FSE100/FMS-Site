@@ -1,3 +1,52 @@
+// <<<<<<< homepage
+button {
+    padding: 20px;
+    margin: 5px;
+    cursor: pointer;
+    background-color: #4975b0;
+    color: rgb(210, 194, 50);
+    border: none;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #48734f;
+}
+
+nav {
+    text-align: center;
+}
+
+h1 {
+    color: #c1ca0a;
+    font-family: 'Comic Sans MS', 'Comic Sans', 'cursive';
+    font-size: 70px;
+    padding: 50px 0;
+    text-align: center;
+    background-image: url('cartoon_landscape.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+body {
+    background-color: #f8f4a5;
+    font-family: 'Comic Sans MS', 'Comic Sans', 'cursive';
+    text-align: center;
+}
+
+.container {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+p {
+    font-size: 50px;
+    line-height: 1.7;
+    margin-bottom: 80px;
+}
+ // =======
 html, body {
   margin: 0;
   padding: 0;
@@ -6,3 +55,4 @@ html, body {
 canvas {
   display: block;
 }
+// >>>>>>> main
