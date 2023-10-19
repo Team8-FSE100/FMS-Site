@@ -1,3 +1,4 @@
+// <<<<<<< homepage
 button {
     padding: 20px;
     margin: 5px;
@@ -45,3 +46,13 @@ p {
     line-height: 1.7;
     margin-bottom: 80px;
 }
+ // =======
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+canvas {
+  display: block;
+}
+// >>>>>>> main
