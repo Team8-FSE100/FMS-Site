@@ -17,20 +17,32 @@ nav {
     text-align: center;
 }
 
+
+.header-box {
+    background-color: rgb(47, 11, 193); /* Adjust the background color and opacity */
+    padding: 20px;
+    border-radius: 15px; /* Adjust the border-radius for rounded edges */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Optional: Add a box shadow for depth */
+    position: fixed;
+    top: 20px;
+    left: 20px;
+}
+
 h1 {
     color: #c1ca0a;
     font-family: 'Comic Sans MS', 'Comic Sans', 'cursive';
     font-size: 70px;
     padding: 50px 0;
     text-align: center;
-    background-image: url('cartoon_landscape.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
 }
+
 
 body {
     background-color: #f8f4a5;
+    background-image: url(cartoon_landscape.jpg);
+    background-attachment: fixed;
+    background-size: cover;
+    margin: 0;
     font-family: 'Comic Sans MS', 'Comic Sans', 'cursive';
     text-align: center;
 }
