@@ -1,16 +1,20 @@
-// <<<<<<< homepage
+
 button {
-    padding: 20px;
-    margin: 5px;
+    padding: 100px;
+    margin: 10px;
     cursor: pointer;
     background-color: #4975b0;
     color: rgb(210, 194, 50);
     border: none;
     border-radius: 5px;
+    width: 150px;
+    height: 50px;
+    font-size: 30px;
+    text-align: center;
 }
 
 button:hover {
-    background-color: #48734f;
+    background-color: #6add7d;
 }
 
 nav {
@@ -18,20 +22,22 @@ nav {
 }
 
 
-.header-box {
+header {
     background-color: rgb(47, 11, 193); /* Adjust the background color and opacity */
     padding: 20px;
-    border-radius: 15px; /* Adjust the border-radius for rounded edges */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Optional: Add a box shadow for depth */
-    position: fixed;
-    top: 20px;
-    left: 20px;
+    border-radius: 20px; /* Adjust the border-radius for rounded edges */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.473); /* Optional: Add a box shadow for depth */
+    top: 15px;
+    left: 15px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 h1 {
-    color: #c1ca0a;
+    color: #f0a822;
     font-family: 'Comic Sans MS', 'Comic Sans', 'cursive';
-    font-size: 70px;
+    font-size: 100px;
     padding: 50px 0;
     text-align: center;
 }
@@ -54,11 +60,11 @@ body {
 }
 
 p {
-    font-size: 50px;
+    font-size: 40px;
     line-height: 1.7;
-    margin-bottom: 80px;
+    margin-bottom: 100px;
 }
- // =======
+
 html, body {
   margin: 0;
   padding: 0;
@@ -67,4 +73,4 @@ html, body {
 canvas {
   display: block;
 }
-// >>>>>>> main
+
