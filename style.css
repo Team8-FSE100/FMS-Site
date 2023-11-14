@@ -3,21 +3,24 @@ button {
     padding: 100px;
     margin: 10px;
     cursor: pointer;
-    background-color: #4975b0;
-    color: rgb(210, 194, 50);
+    background-color: rgb(47, 11, 193);
+    color: #f0a822;
     border: none;
-    border-radius: 5px;
+    border-radius: 15px;
     width: 150px;
     height: 50px;
     font-size: 30px;
     text-align: center;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.747);
 }
 
 button:hover {
-    background-color: #6add7d;
+    background-color: rgb(71, 241, 253);
+    color: rgb(0, 0, 0);
 }
 
-nav {
+nav button {
+    margin: 0 25px;
     text-align: center;
 }
 
@@ -25,8 +28,8 @@ nav {
 header {
     background-color: rgb(47, 11, 193); /* Adjust the background color and opacity */
     padding: 20px;
-    border-radius: 20px; /* Adjust the border-radius for rounded edges */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.473); /* Optional: Add a box shadow for depth */
+    border-radius: 50px; /* Adjust the border-radius for rounded edges */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.747); /* Optional: Add a box shadow for depth */
     top: 15px;
     left: 15px;
     text-align: center;
@@ -54,7 +57,7 @@ body {
 }
 
 .container {
-    max-width: 700px;
+    max-width: 1000px;
     margin: 0 auto;
     padding: 20px;
 }
@@ -62,7 +65,7 @@ body {
 p {
     font-size: 40px;
     line-height: 1.7;
-    margin-bottom: 100px;
+    margin-bottom: 90px;
 }
 
 html, body {
