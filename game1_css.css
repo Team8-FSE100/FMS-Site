@@ -1,15 +1,11 @@
-
 button {
-    padding: 100px;
-    margin: 10px;
+    padding: 30px;
+    font-size: 30px;
     cursor: pointer;
     background-color: rgb(47, 11, 193);
     color: #f0a822;
     border: none;
     border-radius: 15px;
-    width: 150px;
-    height: 50px;
-    font-size: 30px;
     text-align: center;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.747);
 }
@@ -27,11 +23,11 @@ nav button {
 
 header {
     background-color: rgb(47, 11, 193); /* Adjust the background color and opacity */
-    padding: 20px;
-    border-radius: 50px; /* Adjust the border-radius for rounded edges */
+    padding: 10px;
+    border-radius: 30px; /* Adjust the border-radius for rounded edges */
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.747); /* Optional: Add a box shadow for depth */
-    top: 15px;
-    left: 15px;
+    top: 5px;
+    left: 5px;
     text-align: center;
     margin-left: auto;
     margin-right: auto;
@@ -40,15 +36,15 @@ header {
 h1 {
     color: #f0a822;
     font-family: 'Comic Sans MS', 'Comic Sans', 'cursive';
-    font-size: 100px;
-    padding: 50px 0;
+    font-size: 50px;
+    padding: 10px 0;
     text-align: center;
 }
 
 
 body {
     background-color: #f8f4a5;
-    background-image: url(cartoon_landscape.jpg);
+    background-image: url(cartoon_landscape4.jpg);
     background-attachment: fixed;
     background-size: cover;
     margin: 0;
@@ -76,4 +72,3 @@ html, body {
 canvas {
   display: block;
 }
-
