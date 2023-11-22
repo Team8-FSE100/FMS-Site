@@ -1,67 +1,67 @@
-
 let bx;
 let by;
-let boxSize = 110;
-let overBox = false;
+let cowSize = 110;
+let overCow = false;
 let locked = false;
 let xOffset = 0.0;
 let yOffset = 0.0;
+
 let randomX, randomY;
 let score = 0;
 let objects = [];
 let d1 = 25;
 
 function setup() {
-  createCanvas(700, 400);
-  bx = width / 3.0;
+  createCanvas(700, 500);
+  bx = width / 2.0;
   by = height / 2.0;
   objects.push(new Target());
-  textSize(18);
 }
 
 function draw() {
   background('green');
-
+  
   // Test if the cursor is over the cow
   if (
-    mouseX > bx - boxSize / 2 &&
-    mouseX < bx + boxSize / 2 &&
-    mouseY > by - boxSize / 2 &&
-    mouseY < by + boxSize / 2
+    mouseX > bx - cowSize &&
+    mouseX < bx + cowSize &&
+    mouseY > by - cowSize &&
+    mouseY < by + cowSize
   ) {
-    overBox = true;
+    overCow = true;
     if (!locked) {
     }
   } else {
-    overBox = false;
+    overCow = false;
   }
 
   // Draw the cow
   let cow = document.getElementById("cow");
-  cow.style.left = bx - boxSize / 2 + 'px';
-  cow.style.top = by - boxSize / 2 + 'px';
-
-  // Determine random location of target
-  const target = createVector(randomX, randomY);
-
-  // Define region of overlap
-  const vector = target.copy().sub(createVector(bx, by));
-  const overlap = vector.mag() - (d1 / 2 + boxSize / 2);
-
-  // Display objects and score
-  text("Score: " + score, 10, 30);
+  cow.style.left = bx + 'px';
+  cow.style.top = by + 'px';
+  
+  
+  // determine random location of target
+  const target = createVector(randomX, randomY);  
+  
+  // define region of overlap
+  const vector = target.copy().sub(createVector(bx, by));     
+  const overlap = vector.mag() - (d1/2 + cowSize/2);
+  
+  // display objects and score
+  text("Score: " + score, 20, 20);
   objects[0].display();
-
-  // Feedback
+  
+  // feedback
   if (overlap < -7) {
     score = score + 1;
     objects[0] = new Target();
-  }
+  } 
   fill('#58281E');
 }
 
 function mousePressed() {
-  if (overBox) {
+  if (overCow) {
     locked = true;
   } else {
     locked = false;
@@ -72,9 +72,20 @@ function mousePressed() {
 
 function mouseDragged() {
   if (locked) {
-    // Ensure the cow stays within the canvas boundaries
-    bx = constrain(mouseX - xOffset, boxSize / 2, width - boxSize / 2);
-    by = constrain(mouseY - yOffset, boxSize / 2, height - boxSize / 2);
+    if (mouseX - xOffset < 0) {
+      bx = 0;
+    } else if (mouseX > 700) {
+      bx = 700;
+    } else {
+      bx = mouseX - xOffset;
+    }
+    if (mouseY - yOffset < 0) {
+      by = 0;
+    } else if (mouseY > 500) {
+      by = 500;
+    } else {
+      by = mouseY - yOffset;
+    }
   }
 }
 
@@ -84,13 +95,13 @@ function mouseReleased() {
 
 class Target {
   constructor() {
-    randomX = random(boxSize / 2, width - boxSize / 2);
-    randomY = random(boxSize / 2, height - boxSize / 2);
+    randomX = random(720);
+    randomY = random(400);
     this.x = randomX;
     this.y = randomY;
     this.diameter = d1;
   }
-
+  
   display() {
     circle(this.x, this.y, this.diameter);
   }
