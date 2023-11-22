@@ -72,20 +72,21 @@ function mousePressed() {
 
 function mouseDragged() {
   if (locked) {
-    /*
+    
     if (mouseX - xOffset < 0) {
       bx = 0;
     } else if (mouseX > 700) {
       bx = 700;
-    } else { */
-      bx = mouseX /*- xOffset*/;
-    /*}
-    if (mouseY - yOffset < 0) {
-      by = 0;
+    } else { 
+      bx = mouseX - xOffset;
+    }
+    /*
+    if (mouseY - yOffset < ) {
+      by = 0 + 300;
     } else if (mouseY > 500) {
-      by = 500;
+      by = 500 ;
     } else { */
-      by = mouseY /*- yOffset*/;
+      by = mouseY - yOffset + 300;
     //}
   }
 }
