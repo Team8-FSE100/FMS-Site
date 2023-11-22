@@ -14,7 +14,7 @@ let d1 = 25;
 function setup() {
   createCanvas(700, 500);
   bx = width / 2.0;
-  by = height / 2.0;
+  by = height / 2.0 + 300;
   objects.push(new Target());
 }
 
