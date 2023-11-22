@@ -14,7 +14,7 @@ let d1 = 25;
 function setup() {
   createCanvas(700, 500);
   bx = width / 2.0;
-  by = height / 2.0 + 300;
+  by = height / 2.0 + 100;
   objects.push(new Target());
 }
 
@@ -38,7 +38,7 @@ function draw() {
   // Draw the cow
   let cow = document.getElementById("cow");
   cow.style.left = bx + 'px';
-  cow.style.top = by + 'px';
+  cow.style.top = (by+350) + 'px';
   
   
   // determine random location of target
@@ -77,17 +77,17 @@ function mouseDragged() {
       bx = 0;
     } else if (mouseX > 700) {
       bx = 700;
-    } else { 
+    } else {
       bx = mouseX - xOffset;
-    }
-    /*
-    if (mouseY - yOffset < ) {
-      by = 0 + 300;
+    } 
+    
+    if (mouseY - yOffset < 0) {
+      by = 0;
     } else if (mouseY > 500) {
-      by = 500 ;
-    } else { */
-      by = mouseY - yOffset + 300;
-    //}
+      by = 500;
+    } else {
+      by = mouseY - yOffset;
+    }
   }
 }
 
@@ -97,8 +97,8 @@ function mouseReleased() {
 
 class Target {
   constructor() {
-    randomX = random(720);
-    randomY = random(400);
+    randomX = random(700);
+    randomY = random(500);
     this.x = randomX;
     this.y = randomY;
     this.diameter = d1;
