@@ -1,7 +1,10 @@
+
 var circles = [];
 var totalCircles = 10;
 var inQueue = true;
 var score = 0; // Variable to keep track of the score
+var gameOver = false;
+var key = "."
 
 function setup() {
   createCanvas(640, 360);
@@ -22,7 +25,7 @@ function setup() {
     circles.push(circle);
   }
   textSize(18);
-  fill(0); 
+  fill(0);
 }
 
 function draw() {
@@ -41,7 +44,9 @@ function draw() {
         i--;
         score += 10;
       }
-    } else {
+    }
+    else
+    {
       circle.x += circle.xSpeed;
       circle.y += circle.ySpeed;
 
@@ -63,6 +68,15 @@ function draw() {
   text("Score: " + score, 10, 30);
 }
 
+function checkGameOver() {
+  if (circles.length === 0) {
+    key = ".";
+    alert("Game Over!\nYour total score is: " + score + "\nWould you like to play again? (Y/N)");
+    gameOver = true;
+    keyPressed();
+  }
+}
+
 function mouseClicked() {
   for (var i = 0; i < circles.length; i++) {
     var circle = circles[i];
@@ -70,6 +84,22 @@ function mouseClicked() {
 
     if (d < circle.r) {
       circle.expanding = true;
+    }
+  }
+  if(!circles.length)
+    setTimeout(checkGameOver, 1000);
+}
+
+function keyPressed() {
+  if (gameOver) {
+    if (key === 'Y' || key === 'y') {
+      setup();
+      gameOver = false;
+      score = 0;
+    } else if (key === 'N' || key === 'n') {
+      alert("Thanks for plaing!\n" +
+      "Your total score is: " + score);
+      window.history.back();
     }
   }
 }
