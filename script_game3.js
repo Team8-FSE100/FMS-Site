@@ -68,7 +68,7 @@ function draw() {
   text("Score: " + score, 10, 30);
 }
 
-function checkGameOver() {
+function endGame() {
   if (circles.length === 0) {
     key = ".";
     alert("Game Over!\nYour total score is: " + score + "\nWould you like to play again? (Y/N)");
@@ -87,7 +87,7 @@ function mouseClicked() {
     }
   }
   if(!circles.length)
-    setTimeout(checkGameOver, 1000);
+    setTimeout(endGame, 1000);
 }
 
 function keyPressed() {
