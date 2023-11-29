@@ -1,110 +1,138 @@
-let bx;
-let by;
-let cowSize = 110;
-let overCow = false;
-let locked = false;
-let xOffset = 0.0;
-let yOffset = 0.0;
-
-let randomX, randomY;
+let targetLetter;
+let clickableLetters = [];
 let score = 0;
-let objects = [];
-let d1 = 25;
+let letterSelected = false;
+let feedbackMessage = '';
+let feedbackTimer = 60;
+let winningScreen = false;
 
 function setup() {
-  createCanvas(700, 500);
-  bx = width / 2.0;
-  by = height / 2.0 + 100;
-  objects.push(new Target());
+  createCanvas(400, 200);
+  generateTargetLetter();
+  generateClickableLetters();
 }
 
 function draw() {
-  background('green');
-  
-  // Test if the cursor is over the cow
-  if (
-    mouseX > bx - cowSize &&
-    mouseX < bx + cowSize &&
-    mouseY > by - cowSize &&
-    mouseY < by + cowSize
-  ) {
-    overCow = true;
-    if (!locked) {
+  background(220);
+
+  if (!winningScreen) {
+    displayScore();
+    displayTargetLetter();
+    displayFeedbackMessage();
+
+    textSize(32);
+    textAlign(CENTER, CENTER);
+    for (let i = 0; i < clickableLetters.length; i++) {
+      let x = map(i, 0, clickableLetters.length - 1, 50, width - 50);
+      let y = height / 2;
+
+      fill(0);
+      text(clickableLetters[i], x, y);
+    }
+
+    if (mouseIsPressed && !letterSelected) {
+      let clickedLetter = getClickedLetter(mouseX, mouseY);
+      if (clickedLetter === targetLetter) {
+        score++;
+        feedbackMessage = 'Correct!';
+        feedbackTimer = 60;
+        if (score >= 20) {
+          winningScreen = true;
+        } else {
+          generateTargetLetter();
+          generateClickableLetters();
+        }
+        letterSelected = true;
+      } else {
+        feedbackMessage = 'Incorrect, Try Again!';
+        feedbackTimer = 60;
+      }
+    } else if (!mouseIsPressed) {
+      letterSelected = false;
+    }
+
+    if (feedbackTimer > 0) {
+      feedbackTimer--;
+    } else {
+      feedbackMessage = '';
     }
   } else {
-    overCow = false;
+    displayWinningScreen();
+  }
+}
+
+function displayScore() {
+  textSize(24);
+  textAlign(RIGHT, TOP);
+  fill(0);
+  text('Score: ' + score, width - 20, 20);
+}
+
+function displayTargetLetter() {
+  textSize(24);
+  textAlign(LEFT, TOP);
+  fill(0);
+  text('Target: ' + targetLetter, 20, 20);
+}
+
+function displayFeedbackMessage() {
+  textSize(18);
+  textAlign(CENTER, BOTTOM);
+  fill(0);
+  text(feedbackMessage, width / 2, height - 10);
+}
+
+function generateTargetLetter() {
+  let alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  targetLetter = alphabet.charAt(floor(random(alphabet.length)));
+}
+
+function generateClickableLetters() {
+  let alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  clickableLetters = [targetLetter];
+
+  while (clickableLetters.length < 5) {
+    let randomLetter = alphabet.charAt(floor(random(alphabet.length)));
+    if (!clickableLetters.includes(randomLetter)) {
+      clickableLetters.push(randomLetter);
+    }
   }
 
-  // Draw the cow
-  let cow = document.getElementById("cow");
-  cow.style.left = bx + 'px';
-  cow.style.top = (by+350) + 'px';
-  
-  
-  // determine random location of target
-  const target = createVector(randomX, randomY);  
-  
-  // define region of overlap
-  const vector = target.copy().sub(createVector(bx, by));     
-  const overlap = vector.mag() - (d1/2 + cowSize/2);
-  
-  // display objects and score
-  text("Score: " + score, 20, 20);
-  objects[0].display();
-  
-  // feedback
-  if (overlap < -7) {
-    score = score + 1;
-    objects[0] = new Target();
-  } 
-  fill('#58281E');
+  clickableLetters = shuffleArray(clickableLetters);
+}
+
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
+function getClickedLetter(x, y) {
+  let letterWidth = (width - 100) / clickableLetters.length;
+  let clickedIndex = floor((x - 50) / letterWidth);
+  return clickableLetters[clickedIndex];
+}
+
+function displayWinningScreen() {
+  background(200, 255, 200);
+  textSize(40);
+  textAlign(CENTER, CENTER);
+  fill(0);
+
+  text('Congratulations!', width / 2, height / 2 - 20);
+
+  textSize(20);
+  text('You Win!', width / 2, height / 2 + 10);
+  text('Click anywhere to play again', width / 2, height / 1.5);
 }
 
 function mousePressed() {
-  if (overCow) {
-    locked = true;
-  } else {
-    locked = false;
-  }
-  xOffset = mouseX - bx;
-  yOffset = mouseY - by;
-}
-
-function mouseDragged() {
-  if (locked) {
-    
-    if (mouseX - xOffset < 0) {
-      bx = 0;
-    } else if (mouseX > 700) {
-      bx = 700;
-    } else {
-      bx = mouseX - xOffset;
-    } 
-    
-    if (mouseY - yOffset < 0) {
-      by = 0;
-    } else if (mouseY > 500) {
-      by = 500;
-    } else {
-      by = mouseY - yOffset;
-    }
-  }
-}
-
-function mouseReleased() {
-  locked = false;
-}
-
-class Target {
-  constructor() {
-    randomX = random(700);
-    randomY = random(500);
-    this.x = randomX;
-    this.y = randomY;
-    this.diameter = d1;
-  }
-  
-  display() {
-    circle(this.x, this.y, this.diameter);
+  if (winningScreen) {
+    score = 0;
+    generateTargetLetter();
+    generateClickableLetters();
+    winningScreen = false;
   }
 }
