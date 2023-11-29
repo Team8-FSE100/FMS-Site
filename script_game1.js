@@ -1,104 +1,104 @@
-let targetLetter;
-let clickableLetters = [];
+let target;
+let letters = [];
 let score = 0;
-let letterSelected = false;
-let feedbackMessage = '';
-let feedbackTimer = 60;
-let winningScreen = false;
+let selected = false;
+let feedback = '';
+let feedbackTime = 60;
+let winScreen = false;
 
 function setup() {
   createCanvas(400, 200);
-  generateTargetLetter();
-  generateClickableLetters();
+  createTargetLetter();
+  createLetters();
 }
 
 function draw() {
   background(220);
 
-  if (!winningScreen) {
-    displayScore();
-    displayTargetLetter();
-    displayFeedbackMessage();
+  if (!winScreen) {
+    outputScore();
+    outputTargetLetter();
+    outputFeedback();
 
     textSize(32);
     textAlign(CENTER, CENTER);
-    for (let i = 0; i < clickableLetters.length; i++) {
-      let x = map(i, 0, clickableLetters.length - 1, 50, width - 50);
+    for (let i = 0; i < letters.length; i++) {
+      let x = map(i, 0, letters.length - 1, 50, width - 50);
       let y = height / 2;
 
       fill(0);
-      text(clickableLetters[i], x, y);
+      text(letters[i], x, y);
     }
 
-    if (mouseIsPressed && !letterSelected) {
+    if (mouseIsPressed && !selected) {
       let clickedLetter = getClickedLetter(mouseX, mouseY);
-      if (clickedLetter === targetLetter) {
+      if (clickedLetter === target) {
         score++;
-        feedbackMessage = 'Correct!';
-        feedbackTimer = 60;
+        feedback = 'Correct!';
+        feedbackTime = 60;
         if (score >= 20) {
-          winningScreen = true;
+          winScreen = true;
         } else {
-          generateTargetLetter();
-          generateClickableLetters();
+          createTargetLetter();
+          createLetters();
         }
-        letterSelected = true;
+        selected = true;
       } else {
-        feedbackMessage = 'Incorrect, Try Again!';
-        feedbackTimer = 60;
+        feedback = 'Incorrect, Try Again!';
+        feedbackTime = 60;
       }
     } else if (!mouseIsPressed) {
-      letterSelected = false;
+      selected = false;
     }
 
-    if (feedbackTimer > 0) {
-      feedbackTimer--;
+    if (feedbackTime > 0) {
+      feedbackTime--;
     } else {
-      feedbackMessage = '';
+      feedback = '';
     }
   } else {
-    displayWinningScreen();
+    outputWinScreen();
   }
 }
 
-function displayScore() {
+function outputScore() {
   textSize(24);
   textAlign(RIGHT, TOP);
   fill(0);
   text('Score: ' + score, width - 20, 20);
 }
 
-function displayTargetLetter() {
+function outputTargetLetter() {
   textSize(24);
   textAlign(LEFT, TOP);
-  fill(0);
-  text('Target: ' + targetLetter, 20, 20);
+  fill(255, 0, 0);
+  text('Target: ' + target, 20, 20);
 }
 
-function displayFeedbackMessage() {
+function outputFeedback() {
   textSize(18);
   textAlign(CENTER, BOTTOM);
-  fill(0);
-  text(feedbackMessage, width / 2, height - 10);
+  fill(255, 0, 0);
+  text(feedback, width / 2, height - 10);
 }
 
-function generateTargetLetter() {
+function createTargetLetter() {
   let alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  targetLetter = alphabet.charAt(floor(random(alphabet.length)));
+  target = alphabet.charAt(floor(random(alphabet.length)));
 }
 
-function generateClickableLetters() {
+function createLetters() {
   let alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  clickableLetters = [targetLetter];
+  letters = [target];
 
-  while (clickableLetters.length < 5) {
+  while (letters.length < 5) {
     let randomLetter = alphabet.charAt(floor(random(alphabet.length)));
-    if (!clickableLetters.includes(randomLetter)) {
-      clickableLetters.push(randomLetter);
+    if (!letters.includes(randomLetter)) {
+      letters.push(randomLetter);
     }
   }
 
-  clickableLetters = shuffleArray(clickableLetters);
+  letters = shuffleArray(letters);
 }
 
 function shuffleArray(array) {
@@ -110,12 +110,12 @@ function shuffleArray(array) {
 }
 
 function getClickedLetter(x, y) {
-  let letterWidth = (width - 100) / clickableLetters.length;
+  let letterWidth = (width - 100) / letters.length;
   let clickedIndex = floor((x - 50) / letterWidth);
-  return clickableLetters[clickedIndex];
+  return letters[clickedIndex];
 }
 
-function displayWinningScreen() {
+function outputWinScreen() {
   background(200, 255, 200);
   textSize(40);
   textAlign(CENTER, CENTER);
@@ -129,10 +129,10 @@ function displayWinningScreen() {
 }
 
 function mousePressed() {
-  if (winningScreen) {
+  if (winScreen) {
     score = 0;
-    generateTargetLetter();
-    generateClickableLetters();
-    winningScreen = false;
+    createTargetLetter();
+    createLetters();
+    winScreen = false;
   }
 }
