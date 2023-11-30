@@ -78,7 +78,11 @@ function outputTargetLetter() {
 function outputFeedback() {
   textSize(18);
   textAlign(CENTER, BOTTOM);
-  fill(255, 0, 0);
+  if (feedback == 'Correct!') {
+    fill('green');
+  } else {
+    fill(255, 0, 0);
+  }
   text(feedback, width / 2, height - 10);
 }
 
